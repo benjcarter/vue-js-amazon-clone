@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import AdBanner from "@/components/AdBanner.vue";
+import HeaderBar from "@/components/HeaderBar.vue";
 import ProductCard from "@/components/ProductCard.vue";
 </script>
 
 <template>
+  <HeaderBar />
   <main class="mx-auto flex max-w-screen-2xl justify-center">
     <div class="home__container">
       <AdBanner />

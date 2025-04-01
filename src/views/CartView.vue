@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import CartProduct from "@/components/CartProduct.vue";
+import HeaderBar from "@/components/HeaderBar.vue";
 import SubtotalCard from "@/components/SubtotalCard.vue";
-import { useCartStore } from "@/state/useCartStore";
+import { useGetState } from "@/state/useGetState";
 import { storeToRefs } from "pinia";
 
-const cart = useCartStore();
-const { items } = storeToRefs(cart);
+const state = useGetState();
+const { cart } = storeToRefs(state);
 </script>
 
 <template>
+  <HeaderBar />
   <div class="flex h-max bg-white p-5">
     <div class="checkout__left">
       <!-- Ad Banner -->
@@ -28,7 +30,7 @@ const { items } = storeToRefs(cart);
 
         <!-- Product List -->
         <CartProduct
-          v-for="item in items"
+          v-for="item in cart"
           :key="item.id"
           :id="item.id"
           :title="item.title"

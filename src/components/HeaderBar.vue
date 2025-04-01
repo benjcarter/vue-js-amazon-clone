@@ -1,11 +1,19 @@
 <script setup lang="ts">
-import { useCartStore } from "@/state/useCartStore";
+import { auth } from "@/firebase";
+import { useGetState } from "@/state/useGetState";
+import { signOut } from "firebase/auth";
 import { SearchIcon, ShoppingCartIcon } from "lucide-vue-next";
 import { storeToRefs } from "pinia";
 import { RouterLink } from "vue-router";
 
-const cart = useCartStore();
-const { items } = storeToRefs(cart);
+const state = useGetState();
+const { cart, user } = storeToRefs(state);
+
+const handleAuth = async () => {
+  if (user.value) {
+    await signOut(auth);
+  }
+};
 </script>
 
 <template>
@@ -32,10 +40,17 @@ const { items } = storeToRefs(cart);
 
     <!-- Right Nav Options -->
     <div class="flex items-center gap-x-4 px-4">
-      <div class="flex cursor-pointer flex-col text-white hover:underline">
-        <span class="text-xs">Hello, Guest!</span>
-        <span class="text-sm font-extrabold">Sign In</span>
-      </div>
+      <RouterLink :to="!user ? '/login' : ''">
+        <div
+          @click="handleAuth"
+          class="flex cursor-pointer flex-col text-white hover:underline"
+        >
+          <span class="text-xs">Hello, Guest!</span>
+          <span class="text-sm font-extrabold">
+            {{ user ? "Sign Out" : "Sign In" }}
+          </span>
+        </div>
+      </RouterLink>
       <div class="flex cursor-pointer flex-col text-white hover:underline">
         <span class="text-xs">Returns</span>
         <span class="text-sm font-extrabold">&amp; Orders</span>
@@ -45,7 +60,7 @@ const { items } = storeToRefs(cart);
         <span
           class="absolute top-0 -right-2 flex size-4 items-center justify-center rounded-full bg-yellow-500 text-xs font-extrabold"
         >
-          {{ items.length }}
+          {{ cart.length }}
         </span>
       </RouterLink>
     </div>

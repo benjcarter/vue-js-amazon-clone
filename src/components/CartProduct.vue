@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { formatPrice } from "@/lib/utils";
-import { useCartStore } from "@/state/useCartStore";
+import { useGetState } from "@/state/useGetState";
 import { StarIcon } from "lucide-vue-next";
 
 interface CartProductProps {
@@ -13,7 +13,7 @@ interface CartProductProps {
 
 const props = defineProps<CartProductProps>();
 
-const cart = useCartStore();
+const cart = useGetState();
 
 const removeFromCart = () => {
   cart.removeFromCart(props.id);

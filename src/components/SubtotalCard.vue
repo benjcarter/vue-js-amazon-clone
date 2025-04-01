@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { formatPrice } from "@/lib/utils";
-import { useCartStore } from "@/state/useCartStore";
+import { useGetState } from "@/state/useGetState";
 import { storeToRefs } from "pinia";
 
-const cart = useCartStore();
-const { items } = storeToRefs(cart);
+const state = useGetState();
+const { cart } = storeToRefs(state);
 </script>
 
 <template>
@@ -12,8 +12,8 @@ const { items } = storeToRefs(cart);
     class="flex w-75 flex-col justify-between rounded-sm border border-[#ddd] bg-[#f3f3f3] p-5"
   >
     <p>
-      Subtotal ({{ items.length }} items):
-      <strong>{{ formatPrice(cart.getSubtotal) }}</strong>
+      Subtotal ({{ cart.length }} items):
+      <strong>{{ formatPrice(state.getCartSubtotal) }}</strong>
     </p>
 
     <button class="mt-2.5 w-full rounded-lg bg-yellow-500 py-2 font-medium">
