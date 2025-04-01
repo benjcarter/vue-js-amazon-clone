@@ -16,7 +16,7 @@ const { items } = storeToRefs(cart);
       <strong>{{ formatPrice(cart.getSubtotal) }}</strong>
     </p>
 
-    <button class="mt-2.5 w-full rounded-lg bg-yellow-500 py-2">
+    <button class="mt-2.5 w-full rounded-lg bg-yellow-500 py-2 font-medium">
       Proceed to Checkout
     </button>
   </div>

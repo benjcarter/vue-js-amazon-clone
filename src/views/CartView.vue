@@ -1,5 +1,11 @@
 <script setup lang="ts">
+import CartProduct from "@/components/CartProduct.vue";
 import SubtotalCard from "@/components/SubtotalCard.vue";
+import { useCartStore } from "@/state/useCartStore";
+import { storeToRefs } from "pinia";
+
+const cart = useCartStore();
+const { items } = storeToRefs(cart);
 </script>
 
 <template>
@@ -19,10 +25,21 @@ import SubtotalCard from "@/components/SubtotalCard.vue";
         >
           Shopping Cart
         </h2>
-        <!-- CartItem -->
+
+        <!-- Product List -->
+        <CartProduct
+          v-for="item in items"
+          :key="item.id"
+          :id="item.id"
+          :title="item.title"
+          :price="item.price"
+          :image="item.image"
+          :rating="item.rating"
+        />
       </div>
     </div>
 
+    <!-- Subtotal Card -->
     <div class="checkout__right">
       <SubtotalCard />
     </div>

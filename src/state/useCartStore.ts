@@ -18,6 +18,19 @@ export const useCartStore = defineStore("cart", {
   actions: {
     addToCart(item: CartItem) {
       this.items = [...this.items, item];
+    },
+    removeFromCart(id: string) {
+      const newItems = [...this.items];
+
+      const index = newItems.findIndex((item) => item.id === id);
+
+      if (index != -1) {
+        newItems.splice(index, 1);
+      } else {
+        console.warn(`Item with id ${id} not found in cart!`);
+      }
+
+      this.items = newItems;
     }
   }
 });

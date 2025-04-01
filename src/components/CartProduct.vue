@@ -3,7 +3,7 @@ import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/state/useCartStore";
 import { StarIcon } from "lucide-vue-next";
 
-interface ProductCardProps {
+interface CartProductProps {
   id: string;
   title: string;
   image: string;
@@ -11,31 +11,26 @@ interface ProductCardProps {
   rating: number;
 }
 
-const props = defineProps<ProductCardProps>();
+const props = defineProps<CartProductProps>();
 
 const cart = useCartStore();
 
-const addToCart = () => {
-  cart.addToCart({ ...props });
+const removeFromCart = () => {
+  cart.removeFromCart(props.id);
 };
 </script>
 
 <template>
-  <div
-    class="z-10 flex max-h-100 w-full min-w-25 flex-col justify-end bg-white p-5"
-  >
-    <img
-      loading="lazy"
-      :src="image"
-      :alt="title"
-      class="mb-4 max-h-50 w-full object-contain"
-    />
+  <div class="my-5 flex gap-x-5">
+    <img :src="image" :alt="title" class="size-45 object-contain" />
 
-    <div class="mb-4 h-25">
-      <h4>{{ title }}</h4>
-      <p class="mt-1">
+    <div>
+      <h4 class="text-base font-extrabold">{{ title }}</h4>
+
+      <p>
         <strong>{{ formatPrice(price) }}</strong>
       </p>
+
       <div class="flex">
         <StarIcon
           v-for="(_, i) in Array(Math.round(rating))"
@@ -44,13 +39,13 @@ const addToCart = () => {
           class="size-5 text-yellow-500"
         />
       </div>
-    </div>
 
-    <button
-      @click="addToCart"
-      class="w-full rounded-lg bg-yellow-500 py-2 font-medium"
-    >
-      Add To Cart
-    </button>
+      <button
+        @click="removeFromCart"
+        class="mt-2.5 w-full rounded-lg bg-yellow-500 py-2 font-medium"
+      >
+        Remove From Cart
+      </button>
+    </div>
   </div>
 </template>
