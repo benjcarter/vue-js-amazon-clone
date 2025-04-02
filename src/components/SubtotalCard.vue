@@ -2,12 +2,25 @@
 import { formatPrice } from "@/lib/utils";
 import { useGetState } from "@/state/useGetState";
 import { storeToRefs } from "pinia";
-import { useRouter } from "vue-router";
-
-const router = useRouter();
+import axios from "@/axios";
+import { ref } from "vue";
 
 const state = useGetState();
 const { cart } = storeToRefs(state);
+
+const loading = ref(false);
+
+const handleCheckout = async () => {
+  loading.value = true;
+
+  const { data } = await axios.post("/create-checkout-session", {
+    items: cart.value
+  });
+
+  loading.value = false;
+
+  window.location.href = data.url;
+};
 </script>
 
 <template>
@@ -20,10 +33,10 @@ const { cart } = storeToRefs(state);
     </p>
 
     <button
-      @click="router.push('/checkout')"
+      @click="handleCheckout"
       class="mt-2.5 w-full rounded-lg bg-yellow-500 py-2 font-medium"
     >
-      Proceed to Checkout
+      {{ loading ? "Processing..." : "Proceed to Checkout" }}
     </button>
   </div>
 </template>
