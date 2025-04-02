@@ -45,7 +45,7 @@ const handleAuth = async () => {
           @click="handleAuth"
           class="flex cursor-pointer flex-col text-white hover:underline"
         >
-          <span class="text-xs">Hello, Guest!</span>
+          <span class="text-xs">Hello, {{ user ? user.email : "Guest" }}!</span>
           <span class="text-sm font-extrabold">
             {{ user ? "Sign Out" : "Sign In" }}
           </span>

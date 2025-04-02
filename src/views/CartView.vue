@@ -6,7 +6,7 @@ import { useGetState } from "@/state/useGetState";
 import { storeToRefs } from "pinia";
 
 const state = useGetState();
-const { cart } = storeToRefs(state);
+const { cart, user } = storeToRefs(state);
 </script>
 
 <template>
@@ -22,10 +22,11 @@ const { cart } = storeToRefs(state);
       />
 
       <div>
+        <h3 v-if="user" class="text-xl font-bold">Hello, {{ user.email }}</h3>
         <h2
           class="mr-2.5 border-b border-gray-300 p-2.5 pl-0 text-3xl font-bold"
         >
-          Shopping Cart
+          Your Shopping Cart
         </h2>
 
         <!-- Product List -->

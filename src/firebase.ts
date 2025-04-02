@@ -6,12 +6,12 @@ import {
 import { getAuth, type Auth } from "firebase/auth";
 
 const config: FirebaseOptions = {
-  apiKey: "AIzaSyCCx6eiankHGJqtNwS3EOjePnj6k0d3u8s",
-  authDomain: "vue-js-amzn-clone.firebaseapp.com",
-  projectId: "vue-js-amzn-clone",
-  storageBucket: "vue-js-amzn-clone.firebasestorage.app",
-  messagingSenderId: "547348192292",
-  appId: "1:547348192292:web:520bf44bcd243b06c94cb1"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: "vue-js-azn-clone.firebaseapp.com",
+  projectId: "vue-js-azn-clone",
+  storageBucket: "vue-js-azn-clone.firebasestorage.app",
+  messagingSenderId: "376757113163",
+  appId: "1:376757113163:web:6b61fe6b71e57cfa6ad8ce"
 };
 
 const app: FirebaseApp = initializeApp(config);

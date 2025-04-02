@@ -2,6 +2,9 @@
 import { formatPrice } from "@/lib/utils";
 import { useGetState } from "@/state/useGetState";
 import { storeToRefs } from "pinia";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const state = useGetState();
 const { cart } = storeToRefs(state);
@@ -16,7 +19,10 @@ const { cart } = storeToRefs(state);
       <strong>{{ formatPrice(state.getCartSubtotal) }}</strong>
     </p>
 
-    <button class="mt-2.5 w-full rounded-lg bg-yellow-500 py-2 font-medium">
+    <button
+      @click="router.push('/checkout')"
+      class="mt-2.5 w-full rounded-lg bg-yellow-500 py-2 font-medium"
+    >
       Proceed to Checkout
     </button>
   </div>
