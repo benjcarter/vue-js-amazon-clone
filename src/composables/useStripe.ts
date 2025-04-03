@@ -3,6 +3,7 @@ import {
   loadStripe,
   type Stripe,
   type StripeCardElement,
+  type StripeCardElementChangeEvent,
   type StripeElements
 } from "@stripe/stripe-js";
 
@@ -10,7 +11,8 @@ export const useStripe = () => {
   const stripe = ref<Stripe | null>(null);
   const elements = ref<StripeElements | null>(null);
   const cardElement = ref<StripeCardElement | null>(null);
-  const cardComplete = ref<boolean>(false);
+  const complete = ref<boolean>(false);
+  const error = ref<string | null>(null);
 
   onMounted(async () => {
     stripe.value = await loadStripe(
@@ -33,10 +35,11 @@ export const useStripe = () => {
     });
     cardElement.value.mount("#card-element");
 
-    cardElement.value.on("change", (event) => {
-      cardComplete.value = event.complete;
+    cardElement.value.on("change", (event: StripeCardElementChangeEvent) => {
+      complete.value = event.complete;
+      error.value = event.error ? event.error.message : null;
     });
   });
 
-  return { stripe, cardElement, cardComplete };
+  return { stripe, cardElement, complete, error };
 };

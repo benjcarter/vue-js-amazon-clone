@@ -33,6 +33,9 @@ export const useGetState = defineStore("cart", {
 
       this.cart = newCart;
     },
+    emptyCart() {
+      this.cart = [];
+    },
     setUser(user: User | null) {
       this.user = user;
     }
