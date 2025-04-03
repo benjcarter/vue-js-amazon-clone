@@ -43,7 +43,7 @@ const { cart, user } = storeToRefs(state);
     </div>
 
     <!-- Subtotal Card -->
-    <div class="checkout__right">
+    <div>
       <SubtotalCard />
     </div>
   </div>

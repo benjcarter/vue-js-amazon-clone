@@ -33,7 +33,7 @@ const handleAuth = async () => {
     <!-- Search Bar -->
     <div class="hidden flex-1 items-center sm:flex">
       <input type="text" class="h-9 w-full bg-white p-2.5 outline-none" />
-      <div class="flex h-9 w-10 items-center justify-center bg-yellow-500">
+      <div class="flex h-9 w-10 items-center justify-center bg-yellow-300">
         <SearchIcon />
       </div>
     </div>
@@ -58,7 +58,7 @@ const handleAuth = async () => {
       <RouterLink to="/cart" class="relative cursor-pointer">
         <ShoppingCartIcon class="size-9 text-white" />
         <span
-          class="absolute top-0 -right-2 flex size-4 items-center justify-center rounded-full bg-yellow-500 text-xs font-extrabold"
+          class="absolute top-0 -right-2 flex size-4 items-center justify-center rounded-full bg-yellow-300 text-xs font-extrabold"
         >
           {{ cart.length }}
         </span>

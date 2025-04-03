@@ -48,7 +48,7 @@ const addToCart = () => {
 
     <button
       @click="addToCart"
-      class="w-full rounded-lg bg-yellow-500 py-2 font-medium"
+      class="w-full rounded-full bg-yellow-300 py-2 text-sm font-medium"
     >
       Add To Cart
     </button>
