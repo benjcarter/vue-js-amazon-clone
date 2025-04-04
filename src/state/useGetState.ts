@@ -1,13 +1,6 @@
+import type { CartItem } from "@/types";
 import type { User } from "firebase/auth";
 import { defineStore } from "pinia";
-
-interface CartItem {
-  id: string;
-  title: string;
-  price: number;
-  rating: number;
-  image: string;
-}
 
 export const useGetState = defineStore("cart", {
   state: () => ({ cart: [] as CartItem[], user: null as User | null }),

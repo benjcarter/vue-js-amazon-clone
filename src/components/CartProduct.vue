@@ -9,6 +9,7 @@ interface CartProductProps {
   image: string;
   price: number;
   rating: number;
+  hideRemoveButton?: boolean;
 }
 
 const props = defineProps<CartProductProps>();
@@ -41,6 +42,7 @@ const removeFromCart = () => {
       </div>
 
       <button
+        v-if="!hideRemoveButton"
         @click="removeFromCart"
         class="mt-2.5 rounded-full bg-yellow-300 px-10 py-2 text-sm font-medium"
       >

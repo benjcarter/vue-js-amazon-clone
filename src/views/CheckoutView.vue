@@ -10,6 +10,8 @@ import { storeToRefs } from "pinia";
 import { computed, ref } from "vue";
 import type { PaymentIntent, StripeCardElement } from "@stripe/stripe-js";
 import { useRouter } from "vue-router";
+import { setDoc, doc } from "firebase/firestore";
+import { db } from "@/firebase.ts";
 
 const router = useRouter();
 
@@ -26,7 +28,7 @@ const processing = ref<boolean>(false);
 const succeeded = ref<boolean>(false);
 
 const handleSubmit = async () => {
-  if (!stripe.value || !cardElement.value) return;
+  if (!stripe.value || !cardElement.value || !user.value) return;
 
   processing.value = true;
 
@@ -41,12 +43,25 @@ const handleSubmit = async () => {
       paymentMethodId: paymentMethod?.id
     })
     .then(
-      ({
+      async ({
         data: { paymentIntent }
       }: {
         data: { paymentIntent: PaymentIntent };
       }) => {
-        // TODO: add order to database
+        await setDoc(
+          doc(
+            db,
+            "users",
+            user.value?.uid as string,
+            "orders",
+            paymentIntent.id
+          ),
+          {
+            items: cart.value,
+            total: paymentIntent.amount,
+            createdAt: paymentIntent.created
+          }
+        );
 
         succeeded.value = true;
         processing.value = false;

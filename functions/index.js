@@ -19,6 +19,12 @@ app.use(express.json());
 
 // API Routes
 app.post("/payments/create", async (req, res) => {
+  if (
+    req.headers["authorization"] !== process.env.REQUEST_AUTHORIZATION_SECRET
+  ) {
+    return res.status(403).send({ error: "Unauthorized" });
+  }
+
   const { amount, paymentMethodId } = req.body;
 
   const paymentIntent = await stripe.paymentIntents.create({

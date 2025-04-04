@@ -51,10 +51,13 @@ const handleAuth = async () => {
           </span>
         </div>
       </RouterLink>
-      <div class="flex cursor-pointer flex-col text-white hover:underline">
+      <RouterLink
+        to="/orders"
+        class="flex cursor-pointer flex-col text-white hover:underline"
+      >
         <span class="text-xs">Returns</span>
         <span class="text-sm font-extrabold">&amp; Orders</span>
-      </div>
+      </RouterLink>
       <RouterLink to="/cart" class="relative cursor-pointer">
         <ShoppingCartIcon class="size-9 text-white" />
         <span
